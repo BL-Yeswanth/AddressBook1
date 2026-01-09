@@ -1,14 +1,19 @@
+from contact import Contact
+from address_book import AddressBook
 
-from models.contact import Contact
-from models.address_book import AddressBook
+
 class AddressBookMain:
-    
+    """
+    Entry point of Address Book Program
+    """
+
+    def __init__(self):
+        self.address_book = AddressBook()
+
     def start(self):
         print("Welcome to Address Book Program")
-        address_book = AddressBook()
 
-        print("\nEnter Contact Details")
-
+        # UC2: Add Contact
         contact = Contact(
             input("First Name: "),
             input("Last Name: "),
@@ -20,9 +25,19 @@ class AddressBookMain:
             input("Email: ")
         )
 
-        address_book.add_contact(contact)
-        address_book.display_contacts()
+        self.address_book.add_contact(contact)
 
+        # Display
+        self.address_book.display_contacts()
+
+        # =========================
+        # UC3: Edit Contact
+        # =========================
+        name = input("\nEnter First Name to edit contact: ")
+        self.address_book.edit_contact_by_name(name)
+
+        # Final Display
+        self.address_book.display_contacts()
 
 
 if __name__ == "__main__":
