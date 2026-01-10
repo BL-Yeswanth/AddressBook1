@@ -10,8 +10,24 @@ class AddressBook:
         # UC5: Support for Multiple Contacts
         self.contacts = []
 
+    # =========================
+    # UC7: Duplicate Check Helper
+    # =========================
+    def _is_duplicate_contact(self, new_contact):
+        # Java Stream equivalent:
+        # contacts.stream().anyMatch(c -> c.equals(newContact))
+        return any(contact == new_contact for contact in self.contacts)
+
     # UC2: Add Contact
     def add_contact(self, contact):
+        # UC7: Prevent Duplicate Entry
+        if self._is_duplicate_contact(contact):
+            print(
+                f"\nDuplicate Entry ❌ : "
+                f"{contact.first_name} already exists."
+            )
+            return
+
         self.contacts.append(contact)
         print(
             f"\nContact {contact.first_name} {contact.last_name} added successfully."
@@ -35,7 +51,10 @@ class AddressBook:
     def edit_contact_by_name(self, first_name):
         for contact in self.contacts:
             if contact.first_name.lower() == first_name.lower():
-                print(f"\nEditing contact: {contact.first_name} {contact.last_name}")
+                print(
+                    f"\nEditing contact: "
+                    f"{contact.first_name} {contact.last_name}"
+                )
 
                 contact.address = input("Enter New Address: ")
                 contact.city = input("Enter New City: ")
@@ -49,14 +68,14 @@ class AddressBook:
 
         print("\nContact not found ❌")
 
-
     # UC4: Delete Contact
     def delete_contact_by_name(self, first_name):
         for contact in self.contacts:
             if contact.first_name.lower() == first_name.lower():
                 self.contacts.remove(contact)
                 print(
-                    f"\nContact {contact.first_name} {contact.last_name} deleted successfully ✅"
+                    f"\nContact {contact.first_name} "
+                    f"{contact.last_name} deleted successfully ✅"
                 )
                 return
 

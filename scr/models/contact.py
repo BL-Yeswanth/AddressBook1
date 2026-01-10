@@ -11,3 +11,10 @@ class Contact:
         self.zip_code = zip_code
         self.phone_number = phone_number
         self.email = email
+
+    # UC7: Override equals (Java) → __eq__ (Python)
+    def __eq__(self, other):
+        if not isinstance(other, Contact):
+            return False
+
+        return self.first_name.lower() == other.first_name.lower()
