@@ -1,3 +1,4 @@
+from re import search
 from models.contact import Contact
 from models.address_book_system import AddressBookSystem
 from models.search_person import SearchPerson
@@ -81,12 +82,8 @@ class AddressBookMain:
         # UC8: Search Person by City or State across Address Books
         search = SearchPerson(self.system.address_books)
 
-        city = input("\nEnter City to search: ")
-        search.search_by_city(city)
-
-        state = input("\nEnter State to search: ")
-        search.search_by_state(state)
-
+        # UC9: View Persons by City
+        search.menu()
 
 
 if __name__ == "__main__":
