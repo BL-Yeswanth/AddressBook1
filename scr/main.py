@@ -1,5 +1,5 @@
 from models.contact import Contact
-from models.address_book import AddressBook
+from models.address_book_system import AddressBookSystem
 
 
 class AddressBookMain:
@@ -8,12 +8,42 @@ class AddressBookMain:
     """
 
     def __init__(self):
-        self.address_book = AddressBook()
+        self.system = AddressBookSystem()
 
     def start(self):
         print("Welcome to Address Book Program")
 
+        # =========================
+        # UC6: Create / Select Address Book
+        # =========================
+        while True:
+            print("\n1. Create Address Book")
+            print("2. Select Address Book")
+
+            choice = input("Choose option (1/2): ")
+
+            if choice == "1":
+                name = input("Enter Address Book Name: ")
+                self.system.create_address_book(name)
+                address_book = self.system.get_address_book(name)
+                break
+
+            elif choice == "2":
+                self.system.display_address_books()
+                name = input("Enter Address Book Name: ")
+                address_book = self.system.get_address_book(name)
+
+                if not address_book:
+                    print("Address Book not found ❌")
+                    continue
+                break
+
+            else:
+                print("Invalid choice ❌")
+
+        # =========================
         # UC5: Add Multiple Contacts
+        # =========================
         while True:
             print("\nEnter Contact Details")
 
@@ -28,25 +58,25 @@ class AddressBookMain:
                 input("Email: ")
             )
 
-            self.address_book.add_contact(contact)
+            address_book.add_contact(contact)
 
-            choice = input("\nDo you want to add another contact? (yes/no): ").lower()
+            choice = input("\nAdd another contact? (yes/no): ").lower()
             if choice != "yes":
                 break
 
         # Display Contacts
-        self.address_book.display_contacts()
+        address_book.display_contacts()
 
         # UC3: Edit Contact
         name = input("\nEnter First Name to edit contact: ")
-        self.address_book.edit_contact_by_name(name)
+        address_book.edit_contact_by_name(name)
 
         # UC4: Delete Contact
         name = input("\nEnter First Name to delete contact: ")
-        self.address_book.delete_contact_by_name(name)
+        address_book.delete_contact_by_name(name)
 
         # Final Display
-        self.address_book.display_contacts()
+        address_book.display_contacts()
 
 
 if __name__ == "__main__":
