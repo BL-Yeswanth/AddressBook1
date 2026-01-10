@@ -13,21 +13,28 @@ class AddressBookMain:
     def start(self):
         print("Welcome to Address Book Program")
 
-        # UC2: Add Contact
-        contact = Contact(
-            input("First Name: "),
-            input("Last Name: "),
-            input("Address: "),
-            input("City: "),
-            input("State: "),
-            input("Zip Code: "),
-            input("Phone Number: "),
-            input("Email: ")
-        )
+        # UC5: Add Multiple Contacts
+        while True:
+            print("\nEnter Contact Details")
 
-        self.address_book.add_contact(contact)
+            contact = Contact(
+                input("First Name: "),
+                input("Last Name: "),
+                input("Address: "),
+                input("City: "),
+                input("State: "),
+                input("Zip Code: "),
+                input("Phone Number: "),
+                input("Email: ")
+            )
 
-        # Display
+            self.address_book.add_contact(contact)
+
+            choice = input("\nDo you want to add another contact? (yes/no): ").lower()
+            if choice != "yes":
+                break
+
+        # Display Contacts
         self.address_book.display_contacts()
 
         # UC3: Edit Contact
