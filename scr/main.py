@@ -1,5 +1,5 @@
-from contact import Contact
-from address_book import AddressBook
+from models.contact import Contact
+from models.address_book import AddressBook
 
 
 class AddressBookMain:
@@ -30,11 +30,13 @@ class AddressBookMain:
         # Display
         self.address_book.display_contacts()
 
-        # =========================
         # UC3: Edit Contact
-        # =========================
         name = input("\nEnter First Name to edit contact: ")
         self.address_book.edit_contact_by_name(name)
+
+        # UC4: Delete Contact
+        name = input("\nEnter First Name to delete contact: ")
+        self.address_book.delete_contact_by_name(name)
 
         # Final Display
         self.address_book.display_contacts()

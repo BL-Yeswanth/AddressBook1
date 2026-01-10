@@ -3,7 +3,7 @@ from models.contact import Contact
 
 class AddressBook:
     """
-    UC2 + UC3: Manages contacts in Address Book
+    UC2 + UC3 + UC4: Manages contacts in Address Book
     """
 
     def __init__(self):
@@ -30,9 +30,7 @@ class AddressBook:
                 f"Phone: {contact.phone_number}"
             )
 
-    # =========================
-    # UC3: Edit Contact by Name
-    # =========================
+    # UC3: Edit Contact
     def edit_contact_by_name(self, first_name):
         for contact in self.contacts:
             if contact.first_name.lower() == first_name.lower():
@@ -46,6 +44,19 @@ class AddressBook:
                 contact.email = input("Enter New Email: ")
 
                 print("\nContact updated successfully ✅")
+                return
+
+        print("\nContact not found ❌")
+
+
+    # UC4: Delete Contact
+    def delete_contact_by_name(self, first_name):
+        for contact in self.contacts:
+            if contact.first_name.lower() == first_name.lower():
+                self.contacts.remove(contact)
+                print(
+                    f"\nContact {contact.first_name} {contact.last_name} deleted successfully ✅"
+                )
                 return
 
         print("\nContact not found ❌")
