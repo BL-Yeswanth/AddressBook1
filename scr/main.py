@@ -84,6 +84,12 @@ class AddressBookMain:
 
         # UC9: View Persons by City
         search.menu()
+        
+        # UC11: Sort Contacts by Name
+        choice = input("\nDo you want to sort contacts by name? (yes/no): ")
+        if choice.lower() == "yes":
+            address_book.sort_contacts_by_name()
+
 
 
 if __name__ == "__main__":

@@ -18,3 +18,12 @@ class Contact:
             return False
 
         return self.first_name.lower() == other.first_name.lower()
+    
+    def __str__(self):
+        return (
+            f"{self.first_name} {self.last_name}, "
+            f"{self.address}, {self.city}, {self.state}, "
+            f"Zip: {self.zip_code}, "
+            f"Phone: {self.phone_number}, "
+            f"Email: {self.email}"
+        )

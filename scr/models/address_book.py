@@ -80,3 +80,22 @@ class AddressBook:
                 return
 
         print("\nContact not found ❌")
+        
+        # =========================
+    # UC11: Sort Contacts by Name
+    # =========================
+    def sort_contacts_by_name(self):
+        if not self.contacts:
+            print("\nNo contacts available to sort ❌")
+            return
+
+        # Java Streams equivalent: contacts.stream().sorted()
+        self.contacts = sorted(
+            self.contacts,
+            key=lambda c: (c.first_name.lower(), c.last_name.lower())
+        )
+
+        print("\nContacts sorted alphabetically by name ✅")
+        for contact in self.contacts:
+            print(contact)
+
