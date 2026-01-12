@@ -90,6 +90,21 @@ class AddressBookMain:
         if choice.lower() == "yes":
             address_book.sort_contacts_by_name()
 
+        # UC12: Sort Contact by City State Zip
+        print("\n=== Sort Contacts ===")
+        print("1. Sort by City")
+        print("2. Sort by State")
+        print("3. Sort by Zip")
+        print("4. Exit Sorting")
+
+        choice = input("Choose option: ")
+
+        if choice == "1":
+            address_book.sort_contacts_by_city()
+        elif choice == "2":
+            address_book.sort_contacts_by_state()
+        elif choice == "3":
+            address_book.sort_contacts_by_zip()
 
 
 if __name__ == "__main__":

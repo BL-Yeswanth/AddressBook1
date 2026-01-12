@@ -99,3 +99,26 @@ class AddressBook:
         for contact in self.contacts:
             print(contact)
 
+    # =========================
+    # UC12: Sort by City
+    # =========================
+    def sort_contacts_by_city(self):
+        self.contacts.sort(key=lambda c: c.city.lower())
+        print("\nContacts sorted by City ✅")
+        self.display_contacts()
+
+    # =========================
+    # UC12: Sort by State
+    # =========================
+    def sort_contacts_by_state(self):
+        self.contacts.sort(key=lambda c: c.state.lower())
+        print("\nContacts sorted by State ✅")
+        self.display_contacts()
+
+    # =========================
+    # UC12: Sort by Zip
+    # =========================
+    def sort_contacts_by_zip(self):
+        self.contacts.sort(key=lambda c: c.zip_code)
+        print("\nContacts sorted by Zip Code ✅")
+        self.display_contacts()
