@@ -1,5 +1,6 @@
 from models.contact import Contact
 import os
+import csv
 
 class AddressBook:
     """
@@ -158,4 +159,64 @@ class AddressBook:
                     print(line.strip())
         except FileNotFoundError:
             print("\nFile not found ❌")
+            
+    # =========================
+    # UC14: Write Address Book to CSV File
+    # =========================
+    def write_to_csv(self, filename="address_book.csv"):
+        if not self.contacts:
+            print("\nNo contacts to write ❌")
+            return
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        files_dir = os.path.join(base_dir, "files")
+        os.makedirs(files_dir, exist_ok=True)
+
+        file_path = os.path.join(files_dir, filename)
+
+        with open(file_path, mode="w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+
+            # Header (like OpenCSV)
+            writer.writerow([
+                "First Name", "Last Name", "Address",
+                "City", "State", "Zip",
+                "Phone", "Email"
+            ])
+
+            for contact in self.contacts:
+                writer.writerow([
+                    contact.first_name,
+                    contact.last_name,
+                    contact.address,
+                    contact.city,
+                    contact.state,
+                    contact.zip_code,
+                    contact.phone_number,
+                    contact.email
+                ])
+
+        print(f"\nAddress Book saved as CSV at '{file_path}' ✅")
+        
+    # =========================
+    # UC14: Read Address Book from CSV File
+    # =========================
+    def read_from_csv(self, filename="address_book.csv"):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, "files", filename)
+
+        try:
+            with open(file_path, mode="r") as csvfile:
+                reader = csv.reader(csvfile)
+
+                print(f"\nReading Address Book from CSV '{file_path}':\n")
+                next(reader)  # skip header
+
+                for row in reader:
+                    print(", ".join(row))
+
+        except FileNotFoundError:
+            print("\nCSV file not found ❌")
+
+
 

@@ -117,6 +117,18 @@ class AddressBookMain:
             address_book.write_to_file()
         elif choice == "2":
             address_book.read_from_file()
+            
+        print("\n=== CSV File Operations ===")
+        print("1. Save Address Book to CSV")
+        print("2. Read Address Book from CSV")
+
+        choice = input("Choose option (1/2): ")
+
+        if choice == "1":
+            address_book.write_to_csv()
+        elif choice == "2":
+            address_book.read_from_csv()
+
 
 
 if __name__ == "__main__":
