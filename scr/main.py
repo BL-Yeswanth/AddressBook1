@@ -106,6 +106,18 @@ class AddressBookMain:
         elif choice == "3":
             address_book.sort_contacts_by_zip()
 
+        # UC13: File Operations
+        print("\n=== File Operations ===")
+        print("1. Save Address Book to File")
+        print("2. Read Address Book from File")
+
+        choice = input("Choose option (1/2): ")
+
+        if choice == "1":
+            address_book.write_to_file()
+        elif choice == "2":
+            address_book.read_from_file()
+
 
 if __name__ == "__main__":
     app = AddressBookMain()

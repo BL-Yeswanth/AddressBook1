@@ -1,5 +1,5 @@
 from models.contact import Contact
-
+import os
 
 class AddressBook:
     """
@@ -122,3 +122,40 @@ class AddressBook:
         self.contacts.sort(key=lambda c: c.zip_code)
         print("\nContacts sorted by Zip Code ✅")
         self.display_contacts()
+        
+        
+        # =========================
+    # UC13: Write Address Book to File
+    # =========================
+    def write_to_file(self, filename="address_book.txt"):
+        if not self.contacts:
+            print("\nNo contacts to write ❌")
+            return
+
+        with open(filename, "w") as file:
+            for contact in self.contacts:
+                file.write(
+                    f"{contact.first_name},"
+                    f"{contact.last_name},"
+                    f"{contact.address},"
+                    f"{contact.city},"
+                    f"{contact.state},"
+                    f"{contact.zip_code},"
+                    f"{contact.phone_number},"
+                    f"{contact.email}\n"
+                )
+
+        print(f"\nAddress Book saved to file '{filename}' ✅")
+
+    # =========================
+    # UC13: Read Address Book from File
+    # =========================
+    def read_from_file(self, filename="address_book.txt"):
+        try:
+            with open(filename, "r") as file:
+                print(f"\nReading Address Book from '{filename}':\n")
+                for line in file:
+                    print(line.strip())
+        except FileNotFoundError:
+            print("\nFile not found ❌")
+
