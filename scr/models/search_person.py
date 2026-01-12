@@ -1,7 +1,7 @@
 class SearchPerson:
     """
-    UC8 + UC9:
-    Search and View Persons across multiple Address Books
+    UC8 + UC9 + UC10:
+    Search, View and Count Persons across multiple Address Books
     """
 
     def __init__(self, address_books):
@@ -97,7 +97,43 @@ class SearchPerson:
                 print(f"  - {p.first_name} {p.last_name}")
 
     # =========================
-    # MENU CONTROLLER (NEW)
+    # UC10: Count by City
+    # =========================
+    def count_by_city(self):
+        city_count = {}
+
+        for book in self.address_books.values():
+            for contact in book.contacts:
+                city_count[contact.city] = city_count.get(contact.city, 0) + 1
+
+        if not city_count:
+            print("\nNo contacts available ❌")
+            return
+
+        print("\nContact Count by City:")
+        for city, count in city_count.items():
+            print(f"{city} : {count}")
+
+    # =========================
+    # UC10: Count by State
+    # =========================
+    def count_by_state(self):
+        state_count = {}
+
+        for book in self.address_books.values():
+            for contact in book.contacts:
+                state_count[contact.state] = state_count.get(contact.state, 0) + 1
+
+        if not state_count:
+            print("\nNo contacts available ❌")
+            return
+
+        print("\nContact Count by State:")
+        for state, count in state_count.items():
+            print(f"{state} : {count}")
+
+    # =========================
+    # MENU CONTROLLER
     # =========================
     def menu(self):
         while True:
@@ -106,7 +142,9 @@ class SearchPerson:
             print("2. Search Person by State")
             print("3. View Persons by City")
             print("4. View Persons by State")
-            print("5. Exit")
+            print("5. Count Persons by City")
+            print("6. Count Persons by State")
+            print("7. Exit")
 
             choice = input("Enter your choice: ")
 
@@ -121,6 +159,10 @@ class SearchPerson:
             elif choice == "4":
                 self.view_persons_by_state()
             elif choice == "5":
+                self.count_by_city()
+            elif choice == "6":
+                self.count_by_state()
+            elif choice == "7":
                 break
             else:
                 print("Invalid choice ❌ Please try again.")
