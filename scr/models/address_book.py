@@ -1,6 +1,7 @@
 from models.contact import Contact
 import os
 import csv
+import json
 
 class AddressBook:
     """
@@ -217,6 +218,64 @@ class AddressBook:
 
         except FileNotFoundError:
             print("\nCSV file not found ❌")
+            
+            
+    # =========================
+    # UC15: Write Address Book to JSON File
+    # =========================
+    def write_to_json(self, filename="address_book.json"):
+        if not self.contacts:
+            print("\nNo contacts to write ❌")
+            return
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        files_dir = os.path.join(base_dir, "files")
+        os.makedirs(files_dir, exist_ok=True)
+
+        file_path = os.path.join(files_dir, filename)
+
+        data = []
+        for contact in self.contacts:
+            data.append({
+                "first_name": contact.first_name,
+                "last_name": contact.last_name,
+                "address": contact.address,
+                "city": contact.city,
+                "state": contact.state,
+                "zip_code": contact.zip_code,
+                "phone_number": contact.phone_number,
+                "email": contact.email
+            })
+
+        with open(file_path, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+
+        print(f"\nAddress Book saved as JSON at '{file_path}' ✅")
+        
+        
+    # =========================
+    # UC15: Read Address Book from JSON File
+    # =========================
+    def read_from_json(self, filename="address_book.json"):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, "files", filename)
+
+        try:
+            with open(file_path, "r") as json_file:
+                data = json.load(json_file)
+
+                print(f"\nReading Address Book from JSON '{file_path}':\n")
+                for person in data:
+                    print(
+                        f"{person['first_name']} {person['last_name']}, "
+                        f"{person['city']}, {person['state']}, "
+                        f"Phone: {person['phone_number']}"
+                    )
+
+        except FileNotFoundError:
+            print("\nJSON file not found ❌")
+
+
 
 
 

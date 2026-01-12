@@ -1,0 +1,12 @@
+[
+    {
+        "first_name": "xyz",
+        "last_name": "xyz",
+        "address": "123",
+        "city": "bangalore",
+        "state": "karnataka",
+        "zip_code": "544354",
+        "phone_number": "9889898965",
+        "email": "xyz@gmail.com"
+    }
+]
